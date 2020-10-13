@@ -22,6 +22,12 @@ VER_FILE = "ver.json"
 log = logging.getLogger(SELF)
 __version__ = json.load(open(VER_FILE))[SELF]
 __licence__ = "Apache-2.0"
+parser = ArgumentParser(prog=SELF, description=__doc__)
+parser.add_argument(
+    "-U", "--upgrade", action="store_true", help="download latest script"
+)
+parser.add_argument("--framework-upgrade", action="store_true")
+parser.add_argument("-v", "--version", action="version", version=__version__)
 # END OF SECTION MANAGED BY AUTO-UPDATE PROCESS: imports
 
 # place extra imports here
@@ -40,18 +46,7 @@ def searcher(pattern, text, flags=re.M | re.S):
         raise ValueError("could not find %r" % pattern)
 
 
-def get_main_parser():
-    parser = ArgumentParser(prog=SELF, description=__doc__)
-    parser.add_argument(
-        "-U", "--upgrade", action="store_true", help="download latest script"
-    )
-    parser.add_argument("--framework-upgrade", action="store_true")
-    parser.add_argument("-v", "--version", action="version", version=__version__)
-    return parser
-
-
 def main(argv=None):
-    parser = get_main_parser()
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO)
     if args.upgrade:
