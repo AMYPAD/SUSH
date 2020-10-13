@@ -5,12 +5,14 @@ Example of a self-updating pure Python module with no external dependencies.
 from __future__ import print_function
 from argparse import ArgumentParser
 from os import path
+
 try:
     from urllib.request import urlopen
 except ImportError:
     from urllib2 import urlopen
 import json
 import logging
+
 REPO = "https://raw.githubusercontent.com/AMYPAD/SUSH/main/"
 SELF = path.basename(__file__)
 VER_FILE = "ver.json"
@@ -31,7 +33,7 @@ def main(argv=None):
     if args.upgrade:
         log.debug("fetching %s", REPO + VER_FILE)
         upstream_ver = json.load(urlopen(REPO + VER_FILE))[SELF]
-        if upstream_ver.split('.') > __version__.split('.'):
+        if upstream_ver.split(".") > __version__.split("."):
             log.warning("overwriting self")
             log.debug("fetching %s", REPO + SELF)
             upstream = urlopen(REPO + SELF).read()
