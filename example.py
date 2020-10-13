@@ -60,14 +60,14 @@ def main(argv=None):
         if upstream_ver.split(".") > __version__.split("."):
             log.warning("overwriting self")
             log.debug("fetching %s", REPO + SELF)
-            upstream = urlopen(REPO + SELF).read()
+            upstream = urlopen(REPO + SELF).read().decode("utf-8")
             with open(__file__, "w") as fo:
                 fo.write(upstream)
         else:
             log.info("already up-to-date")
     if args.framework_upgrade:
         log.debug("fetching %s", REPO + SELF_BASE)
-        upstream = urlopen(REPO + SELF_BASE).read()
+        upstream = urlopen(REPO + SELF_BASE).read().decode("utf-8")
         self = open(__file__).read()
         update = "".join(
             (
