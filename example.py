@@ -18,6 +18,7 @@ SELF = path.basename(__file__)
 VER_FILE = "ver.json"
 log = logging.getLogger(SELF)
 __version__ = json.load(open(VER_FILE))[SELF]
+__licence__ = "Apache-2.0"
 
 
 def get_main_parser():
