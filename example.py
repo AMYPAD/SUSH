@@ -21,8 +21,9 @@ __version__ = json.load(open(VER_FILE))[SELF]
 
 
 def get_main_parser():
-    parser = ArgumentParser(prog=SELF, version=__version__)
+    parser = ArgumentParser(prog=SELF)
     parser.add_argument("-U", "--upgrade", action="store_true")
+    parser.add_argument("-v", "--version", action="version", version=__version__)
     return parser
 
 
